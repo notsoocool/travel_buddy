@@ -5,3 +5,4 @@ sentencepiece
 requests
 python-dotenv
 pydantic
+torch
