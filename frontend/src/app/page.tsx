@@ -1,6 +1,3 @@
-"use client";
-
-import { useState } from "react";
 import { Globe, MapPin, DollarSign, Calendar, Sparkles } from "lucide-react";
 import Link from "next/link";
 
