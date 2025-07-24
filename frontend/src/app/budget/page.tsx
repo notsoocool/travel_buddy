@@ -33,6 +33,13 @@ function BudgetForm() {
 		{ value: "luxury", label: "Luxury", description: "High-end hotels, fine dining, private transport" },
 	];
 
+	const currentDate = new Date().toLocaleDateString("en-US", {
+		weekday: "long",
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	});
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!destination.trim()) return;
@@ -81,6 +88,7 @@ function BudgetForm() {
 					<p className="text-xl text-gray-600">
 						Get detailed cost estimates for your trip to <span className="font-semibold text-green-600">{destination || "your destination"}</span>.
 					</p>
+					<p className="text-sm text-gray-500 mt-2">Planning on {currentDate}</p>
 				</div>
 
 				{/* Budget Form */}

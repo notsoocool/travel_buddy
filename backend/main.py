@@ -6,7 +6,7 @@ from fastapi import Request
 from agents.budget_agent import suggest_budget
 from agents.itenary_agent import generate_itinerary
 
-app = FastAPI()
+app = FastAPI(title="Travel Buddy AI", version="1.0.0")
 
 app.add_middleware(
     CORSMiddleware,
@@ -24,7 +24,11 @@ app.add_middleware(
 
 @app.get("/")
 def root():
-    return {"message": "Travel Buddy AI"}
+    return {"message": "Travel Buddy AI - Your AI-Powered Travel Companion", "status": "active"}
+
+@app.get("/health")
+def health_check():
+    return {"status": "healthy", "service": "travel-buddy-api"}
 
 @app.post("/suggest-destinations")
 def suggest_destinations(data: DestinationRequest):

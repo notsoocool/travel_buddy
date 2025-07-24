@@ -36,6 +36,14 @@ function ItineraryForm() {
 		{ value: "history_museums", label: "History & Museums", description: "Historical sites, museums, and cultural heritage" },
 	];
 
+	const getCurrentSeason = () => {
+		const month = new Date().getMonth();
+		if (month >= 2 && month <= 4) return "Spring";
+		if (month >= 5 && month <= 7) return "Summer";
+		if (month >= 8 && month <= 10) return "Autumn";
+		return "Winter";
+	};
+
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		if (!destination.trim()) return;
@@ -84,6 +92,7 @@ function ItineraryForm() {
 					<p className="text-xl text-gray-600">
 						Get a detailed day-by-day plan for your trip to <span className="font-semibold text-purple-600">{destination || "your destination"}</span>.
 					</p>
+					<p className="text-sm text-gray-500 mt-2">Current season: {getCurrentSeason()}</p>
 				</div>
 
 				{/* Itinerary Form */}

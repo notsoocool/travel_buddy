@@ -9,5 +9,6 @@ def get_budget_prompt(destination, days, travel_style):
         f"As a travel budget planner AI, suggest an estimated budget (in INR) "
         f"for a trip to {destination} for {days} days. The travel style is '{travel_style}'. "
         f"Consider flight, stay, food, transport, and misc expenses. "
-        f"Respond with only a number, no words or symbols."
+        f"Respond with only a number, no words or symbols. "
+        f"Make it realistic based on current market prices."
     )
