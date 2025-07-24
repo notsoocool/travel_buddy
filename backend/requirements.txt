@@ -1,8 +1,5 @@
 fastapi
 uvicorn
-transformers
-sentencepiece
 requests
 python-dotenv
 pydantic
-torch
