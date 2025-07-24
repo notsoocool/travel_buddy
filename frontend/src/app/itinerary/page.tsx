@@ -45,7 +45,7 @@ function ItineraryForm() {
 		setItinerary("");
 
 		try {
-			const response = await axios.post<ItineraryResponse>("https://travel-buddy-l44v.onrender.com//itinerary", {
+			const response = await axios.post<ItineraryResponse>("https://travel-buddy-l44v.onrender.com/itinerary", {
 				destination: destination.trim(),
 				days,
 				interest,
@@ -243,14 +243,16 @@ function ItineraryForm() {
 
 export default function ItineraryPage() {
 	return (
-		<Suspense fallback={
-			<div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 flex items-center justify-center">
-				<div className="text-center">
-					<Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-purple-600" />
-					<p className="text-gray-600">Loading itinerary generator...</p>
+		<Suspense
+			fallback={
+				<div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 flex items-center justify-center">
+					<div className="text-center">
+						<Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-purple-600" />
+						<p className="text-gray-600">Loading itinerary generator...</p>
+					</div>
 				</div>
-			</div>
-		}>
+			}
+		>
 			<ItineraryForm />
 		</Suspense>
 	);
