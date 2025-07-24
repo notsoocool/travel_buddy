@@ -1,6 +1,6 @@
 def make_prompt(interest):
     return (
-        f"You are a travel expert. Suggest 3 different travel destinations for someone interested in {interest}.\n"
+        f"You are a travel expert. Suggest 5 different travel destinations for someone interested in {interest}.\n"
         "List only the names, separated by commas. Do not repeat any destination."
     )
     
