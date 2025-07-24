@@ -24,25 +24,15 @@ export default function DestinationsPage() {
 		setDestinations([]);
 
 		try {
-			console.log("Sending request to API...");
 			const response = await axios.post<DestinationResponse>("https://travel-buddy-l44v.onrender.com/suggest-destinations", { interest: interest.trim() });
 
-			console.log("API Response:", response.data);
-
-			// Parse the destinations string into an array
 			const destinationsString = response.data.destinations || "";
-			console.log("Destinations string:", destinationsString);
-
 			const destinationsArray = destinationsString
 				.split(",")
 				.map((d) => d.trim())
 				.filter((d) => d);
-			console.log("Parsed destinations array:", destinationsArray);
-
 			setDestinations(destinationsArray);
 		} catch (err: unknown) {
-			console.error("API Error:", err);
-
 			if (err && typeof err === "object" && "response" in err) {
 				const error = err as { response?: { status?: number } };
 				if (error.response?.status === 401) {
@@ -67,12 +57,10 @@ export default function DestinationsPage() {
 		}
 	};
 
-	// Ensure destinations is always an array
 	const safeDestinations = Array.isArray(destinations) ? destinations : [];
 
 	return (
 		<div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-			{/* Navigation */}
 			<nav className="bg-white/80 backdrop-blur-md border-b border-gray-200 sticky top-0 z-50">
 				<div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 					<div className="flex justify-between items-center h-16">
@@ -89,13 +77,11 @@ export default function DestinationsPage() {
 			</nav>
 
 			<div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-				{/* Header */}
 				<div className="text-center mb-12">
 					<h1 className="text-4xl font-bold text-gray-900 mb-4">Discover Your Perfect Destination</h1>
 					<p className="text-xl text-gray-600">Tell us what interests you, and our AI will suggest amazing destinations for your next trip.</p>
 				</div>
 
-				{/* Search Form */}
 				<div className="bg-white rounded-2xl shadow-xl p-8 mb-8">
 					<form onSubmit={handleSubmit} className="space-y-6">
 						<div>
@@ -134,7 +120,6 @@ export default function DestinationsPage() {
 					</form>
 				</div>
 
-				{/* Results */}
 				{error && (
 					<div className="bg-red-50 border border-red-200 rounded-lg p-4 mb-8">
 						<h3 className="font-semibold text-red-800 mb-2">Error</h3>
@@ -192,7 +177,6 @@ export default function DestinationsPage() {
 					</div>
 				)}
 
-				{/* Tips */}
 				{!loading && safeDestinations.length === 0 && !error && (
 					<div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
 						<h3 className="text-lg font-semibold text-blue-900 mb-3">💡 Tips for Better Results</h3>

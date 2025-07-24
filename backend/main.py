@@ -1,5 +1,3 @@
-# main.py
-
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 from agents.destination_agent import get_destinations
@@ -10,7 +8,6 @@ from agents.itenary_agent import generate_itinerary
 
 app = FastAPI()
 
-# Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[

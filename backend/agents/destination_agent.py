@@ -1,5 +1,3 @@
-# agents/destination_agent.py
-
 import os
 from dotenv import load_dotenv
 from models.flan_wrapper import ask_model
@@ -15,10 +13,16 @@ DESTINATION_DB = {
     "mountains": ["Nepal", "Peru", "Switzerland", "Bhutan", "Canada"],
     "beaches": ["Maldives", "Bali", "Hawaii", "Ibiza", "Phuket"],
     "culture": ["Japan", "Italy", "Morocco", "India", "Turkey"],
-    # ... more categories
+    "adventure": ["New Zealand", "Costa Rica", "Iceland", "Norway", "Chile"],
+    "food": ["Italy", "Japan", "Thailand", "France", "Mexico"],
+    "history": ["Egypt", "Greece", "Italy", "China", "India"],
+    "nature": ["Costa Rica", "Kenya", "Brazil", "Australia", "Canada"],
+    "shopping": ["Dubai", "Singapore", "Hong Kong", "New York", "Paris"],
+    "nightlife": ["Ibiza", "Las Vegas", "Bangkok", "Berlin", "Miami"],
+    "relaxation": ["Maldives", "Bali", "Seychelles", "Fiji", "Mauritius"]
 }
 
-def get_destinations_from_opentripmap(interest, limit=5):  # Changed from 3 to 5
+def get_destinations_from_opentripmap(interest, limit=5):
     if not OPENTRIPMAP_API_KEY:
         return ""
     url = (
@@ -41,10 +45,10 @@ def post_process_destinations(output):
     for d in destinations:
         if d.lower() not in [u.lower() for u in unique_destinations]:
             unique_destinations.append(d)
-        if len(unique_destinations) == 5:  # Changed from 3 to 5
+        if len(unique_destinations) == 5:
             break
     for fallback in FALLBACK_DESTINATIONS:
-        if len(unique_destinations) == 5:  # Changed from 3 to 5
+        if len(unique_destinations) == 5:
             break
         if fallback.lower() not in [u.lower() for u in unique_destinations]:
             unique_destinations.append(fallback)
@@ -74,12 +78,12 @@ def get_destinations_from_db(interest):
         for lst in lists:
             if i < len(lst) and lst[i] not in interleaved:
                 interleaved.append(lst[i])
-            if len(interleaved) == 5:  # Changed from 3 to 5
+            if len(interleaved) == 5:
                 break
-        if len(interleaved) == 5:  # Changed from 3 to 5
+        if len(interleaved) == 5:
             break
-    if len(interleaved) < 5:  # Changed from 3 to 5
-        interleaved += ["France", "Australia", "Brazil", "Spain", "Thailand"][:5-len(interleaved)]  # Added more fallbacks
+    if len(interleaved) < 5:
+        interleaved += ["France", "Australia", "Brazil", "Spain", "Thailand"][:5-len(interleaved)]
     return ", ".join(interleaved)
 
 def get_destinations(user_input: dict) -> dict:
@@ -88,7 +92,7 @@ def get_destinations(user_input: dict) -> dict:
     if api_result:
         return {"destinations": api_result}
     db_result = get_destinations_from_db(interest)
-    if db_result and db_result.count(',') >= 4:  # Changed from 2 to 4 (5 destinations)
+    if db_result and db_result.count(',') >= 4:
         return {"destinations": db_result}
     prompt = make_prompt(interest)
     try:

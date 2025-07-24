@@ -9,8 +9,23 @@ DESTINATION_BASE_COST = {
     "japan": 25000,
     "nepal": 8000,
     "thailand": 9000,
-    # ... add more
+    "bali": 12000,
+    "singapore": 18000,
+    "dubai": 22000,
+    "new york": 30000,
+    "london": 28000,
+    "australia": 35000,
+    "canada": 25000,
+    "brazil": 16000,
+    "mexico": 14000,
+    "italy": 20000,
+    "spain": 18000,
+    "greece": 16000,
+    "turkey": 12000,
+    "india": 8000,
+    "china": 15000
 }
+
 STYLE_MULTIPLIER = {
     "budget": 0.8,
     "mid-range": 1.0,
@@ -25,9 +40,7 @@ def calculate_budget(destination, days, style):
 def suggest_budget(destination: str, days: int, travel_style: str) -> dict:
     prompt = get_budget_prompt(destination, days, travel_style)
     try:
-        # Use DeepSeek LLM for a rich, context-aware budget suggestion
         llm_response = generate_flan_response(prompt)
-        # Try to extract a number from the LLM response
         match = re.search(r"[\d,]+", llm_response)
         if match:
             budget = match.group(0).replace(",", "")
