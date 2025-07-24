@@ -42,7 +42,7 @@ function BudgetForm() {
 		setBudget("");
 
 		try {
-			const response = await axios.post<BudgetResponse>("http://localhost:8000/budget", {
+			const response = await axios.post<BudgetResponse>("https://travel-buddy-l44v.onrender.com/budget", {
 				destination: destination.trim(),
 				days,
 				style,

@@ -45,7 +45,7 @@ function ItineraryForm() {
 		setItinerary("");
 
 		try {
-			const response = await axios.post<ItineraryResponse>("http://localhost:8000/itinerary", {
+			const response = await axios.post<ItineraryResponse>("https://travel-buddy-l44v.onrender.com//itinerary", {
 				destination: destination.trim(),
 				days,
 				interest,

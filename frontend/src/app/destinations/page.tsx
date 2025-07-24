@@ -25,7 +25,7 @@ export default function DestinationsPage() {
 
 		try {
 			console.log("Sending request to API...");
-			const response = await axios.post<DestinationResponse>("http://localhost:8000/suggest-destinations", { interest: interest.trim() });
+			const response = await axios.post<DestinationResponse>("https://travel-buddy-l44v.onrender.com/suggest-destinations", { interest: interest.trim() });
 
 			console.log("API Response:", response.data);
 
