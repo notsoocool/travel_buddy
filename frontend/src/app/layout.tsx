@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -6,7 +6,11 @@ export const metadata: Metadata = {
 	description: "Plan your perfect trip with AI. Discover destinations, plan budgets, and create detailed itineraries powered by artificial intelligence.",
 	keywords: "travel, AI, itinerary, budget, destinations, trip planning, vacation",
 	authors: [{ name: "Travel Buddy AI" }],
-	viewport: "width=device-width, initial-scale=1",
+};
+
+export const viewport: Viewport = {
+	width: "device-width",
+	initialScale: 1,
 };
 
 export default function RootLayout({

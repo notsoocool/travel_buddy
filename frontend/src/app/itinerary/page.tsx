@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { Calendar, MapPin, Loader2, ArrowLeft, List, Clock, DollarSign } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
@@ -11,7 +11,7 @@ interface ItineraryResponse {
 	itinerary: string;
 }
 
-export default function ItineraryPage() {
+function ItineraryForm() {
 	const searchParams = useSearchParams();
 	const [destination, setDestination] = useState("");
 	const [days, setDays] = useState(3);
@@ -238,5 +238,20 @@ export default function ItineraryPage() {
 				)}
 			</div>
 		</div>
+	);
+}
+
+export default function ItineraryPage() {
+	return (
+		<Suspense fallback={
+			<div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-pink-50 flex items-center justify-center">
+				<div className="text-center">
+					<Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-purple-600" />
+					<p className="text-gray-600">Loading itinerary generator...</p>
+				</div>
+			</div>
+		}>
+			<ItineraryForm />
+		</Suspense>
 	);
 }

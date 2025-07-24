@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, Suspense } from "react";
 import { DollarSign, Calendar, MapPin, Loader2, ArrowLeft, TrendingUp } from "lucide-react";
 import Link from "next/link";
 import axios from "axios";
@@ -10,7 +10,7 @@ interface BudgetResponse {
 	budget: string;
 }
 
-export default function BudgetPage() {
+function BudgetForm() {
 	const searchParams = useSearchParams();
 	const [destination, setDestination] = useState("");
 	const [days, setDays] = useState(5);
@@ -231,5 +231,22 @@ export default function BudgetPage() {
 				)}
 			</div>
 		</div>
+	);
+}
+
+export default function BudgetPage() {
+	return (
+		<Suspense
+			fallback={
+				<div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-blue-50 flex items-center justify-center">
+					<div className="text-center">
+						<Loader2 className="h-8 w-8 animate-spin mx-auto mb-4 text-green-600" />
+						<p className="text-gray-600">Loading budget planner...</p>
+					</div>
+				</div>
+			}
+		>
+			<BudgetForm />
+		</Suspense>
 	);
 }
