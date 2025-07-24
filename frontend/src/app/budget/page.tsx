@@ -48,7 +48,7 @@ export default function BudgetPage() {
 				style,
 			});
 			setBudget(response.data.budget || "");
-		} catch (err) {
+		} catch (err: unknown) {
 			setError("Failed to calculate budget. Please try again.");
 			console.error("Error calculating budget:", err);
 		} finally {

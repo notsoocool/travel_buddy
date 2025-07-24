@@ -51,7 +51,7 @@ export default function ItineraryPage() {
 				interest,
 			});
 			setItinerary(response.data.itinerary || "");
-		} catch (err) {
+		} catch (err: unknown) {
 			setError("Failed to generate itinerary. Please try again.");
 			console.error("Error generating itinerary:", err);
 		} finally {

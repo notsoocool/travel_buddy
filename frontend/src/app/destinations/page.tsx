@@ -40,17 +40,27 @@ export default function DestinationsPage() {
 			console.log("Parsed destinations array:", destinationsArray);
 
 			setDestinations(destinationsArray);
-		} catch (err: any) {
+		} catch (err: unknown) {
 			console.error("API Error:", err);
 
-			if (err.response?.status === 401) {
-				setError("API authentication failed. Please check the Hugging Face API token configuration.");
-			} else if (err.response?.status === 500) {
-				setError("Server error. The AI service is currently unavailable.");
-			} else if (err.code === "ECONNREFUSED") {
-				setError("Cannot connect to the server. Please make sure the backend is running.");
+			if (err && typeof err === "object" && "response" in err) {
+				const error = err as { response?: { status?: number } };
+				if (error.response?.status === 401) {
+					setError("API authentication failed. Please check the Hugging Face API token configuration.");
+				} else if (error.response?.status === 500) {
+					setError("Server error. The AI service is currently unavailable.");
+				} else {
+					setError("Failed to fetch destinations. Please try again.");
+				}
+			} else if (err && typeof err === "object" && "code" in err) {
+				const error = err as { code?: string };
+				if (error.code === "ECONNREFUSED") {
+					setError("Cannot connect to the server. Please make sure the backend is running.");
+				} else {
+					setError("Failed to fetch destinations. Please try again.");
+				}
 			} else {
-				setError(`Failed to fetch destinations: ${err.message || "Unknown error"}`);
+				setError("Failed to fetch destinations. Please try again.");
 			}
 		} finally {
 			setLoading(false);
